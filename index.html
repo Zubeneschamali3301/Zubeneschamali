@@ -2,7 +2,7 @@
 <html>
 <head>
 <title>ACCESS</title>
-<link rel="stylesheet" href="style.css?v=2">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="container">
@@ -11,9 +11,46 @@
 <p>Misión cargada.</p>
 <p>Nada es lo que parece.</p>
 <p class="blink">_</p>
+<div class="container">
+  <h2 id="contador"></h2>
 </div>
+<script>
+  const fechaDestino = new Date("2026-05-05T01:00:00").getTime(); // cámbiala
+  const urlFinal = "malasana.html"; // 👉 tu página final
 
-<!-- La siguiente ruta es /base64.html -->
+  const x = setInterval(function () {
 
+    const ahora = new Date().getTime();
+    const distancia = fechaDestino - ahora;
+
+    const dias = Math.floor(distancia / (1000 * 60 * 60 * 24));
+    const horas = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
+    const segundos = Math.floor((distancia % (1000 * 60)) / 1000);
+
+    document.getElementById("contador").innerHTML =
+      dias + "d " + horas + "h " + minutos + "m " + segundos + "s";
+
+    // 🔥 CUANDO LLEGA A CERO
+    if (distancia <= 0) {
+      clearInterval(x);
+
+      document.getElementById("contador").innerHTML = "MISIÓN ACTIVADA";
+
+      // efecto dramático antes de redirigir
+      document.body.innerHTML = `
+        <div style="color:white; text-align:center; padding-top:100px; font-family:monospace;">
+          <h1>🚨 ACCESO COMPLETADO 🚨</h1>
+          <p>Redirigiendo al destino...</p>
+        </div>
+      `;
+
+      setTimeout(() => {
+        window.location.href = urlFinal;
+      }, 3000);
+    }
+
+  }, 1000);
+</script>
 </body>
 </html>
