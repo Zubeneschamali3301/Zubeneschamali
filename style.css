@@ -1,0 +1,29 @@
+body {
+  background-color #000;
+  color #00ff9c;
+  font-family Courier New, monospace;
+  text-align center;
+  padding 40px;
+}
+
+.container {
+  max-width 700px;
+  margin auto;
+}
+
+h1 {
+  font-size 2.2em;
+}
+
+a {
+  color #00ff9c;
+  text-decoration none;
+}
+
+.blink {
+  animation blink 1s infinite;
+}
+
+@keyframes blink {
+  50% { opacity 0; }
+}
