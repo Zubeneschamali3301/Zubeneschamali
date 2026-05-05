@@ -37,3 +37,212 @@ img {
 @keyframes blink {
   50% { opacity: 0; }
 }
+.glitch {
+  position: relative;
+  color: white;
+  font-size: 2.5em;
+  font-weight: bold;
+  letter-spacing: 2px;
+  animation: glitch-skew 1s infinite linear alternate-reverse;
+}
+
+/* capas duplicadas */
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* capa roja */
+.glitch::before {
+  left: 2px;
+  text-shadow: -2px 0 red;
+  animation: glitch-anim 0.3s infinite linear alternate-reverse;
+}
+
+/* capa azul */
+.glitch::after {
+  left: -2px;
+  text-shadow: -2px 0 cyan;
+  animation: glitch-anim2 0.3s infinite linear alternate-reverse;
+}
+
+/* movimiento horizontal glitch */
+@keyframes glitch-anim {
+  0% { clip-path: inset(10% 0 80% 0); }
+  20% { clip-path: inset(60% 0 10% 0); }
+  40% { clip-path: inset(30% 0 40% 0); }
+  60% { clip-path: inset(80% 0 5% 0); }
+  80% { clip-path: inset(0% 0 90% 0); }
+  100% { clip-path: inset(50% 0 20% 0); }
+}
+
+@keyframes glitch-anim2 {
+  0% { clip-path: inset(80% 0 5% 0); }
+  20% { clip-path: inset(0% 0 90% 0); }
+  40% { clip-path: inset(50% 0 20% 0); }
+  60% { clip-path: inset(10% 0 80% 0); }
+  80% { clip-path: inset(60% 0 10% 0); }
+  100% { clip-path: inset(30% 0 40% 0); }
+}
+
+@keyframes glitch-skew {
+  0% { transform: skew(0deg); }
+  25% { transform: skew(2deg); }
+  50% { transform: skew(-2deg); }
+  75% { transform: skew(1deg); }
+  100% { transform: skew(0deg); }
+}
+/* efecto global de vibración */
+.virus-screen {
+  animation: shake 0.2s infinite;
+  overflow: hidden;
+}
+
+/* sacudida */
+@keyframes shake {
+  0% { transform: translate(0, 0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(2px, -2px); }
+  60% { transform: translate(-2px, -1px); }
+  80% { transform: translate(1px, 2px); }
+  100% { transform: translate(0, 0); }
+}
+
+/* distorsión de texto */
+.glitch-text {
+  position: relative;
+  color: white;
+  font-size: 2.2em;
+  font-weight: bold;
+  animation: flicker 1.5s infinite;
+}
+
+@keyframes flicker {
+  0% { opacity: 1; }
+  10% { opacity: 0.8; }
+  20% { opacity: 0.3; }
+  30% { opacity: 1; }
+  40% { opacity: 0.6; }
+  50% { opacity: 1; }
+  60% { opacity: 0.2; }
+  70% { opacity: 1; }
+  100% { opacity: 1; }
+}
+
+/* “pantalla rota” overlay */
+.virus-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(255,0,0,0.05),
+    rgba(0,0,0,0.05) 2px
+  );
+  pointer-events: none;
+  animation: scanlines 0.2s infinite;
+}
+
+@keyframes scanlines {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(10px); }
+}
+/* efecto pantalla quemada */
+.burn {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: radial-gradient(circle at center,
+    rgba(255, 60, 0, 0.15),
+    rgba(0, 0, 0, 0.9) 70%
+  );
+  mix-blend-mode: overlay;
+  animation: burnFlicker 0.4s infinite;
+  z-index: 9999;
+}
+
+/* manchas de sobrecalentamiento */
+.burn::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: repeating-radial-gradient(
+    circle,
+    rgba(255, 80, 0, 0.08),
+    transparent 10%
+  );
+  opacity: 0.4;
+}
+
+/* parpadeo de calor */
+@keyframes burnFlicker {
+  0% { opacity: 0.8; filter: hue-rotate(0deg); }
+  25% { opacity: 1; filter: hue-rotate(20deg); }
+  50% { opacity: 0.6; filter: hue-rotate(-10deg); }
+  75% { opacity: 1; filter: hue-rotate(30deg); }
+  100% { opacity: 0.8; filter: hue-rotate(0deg); }
+}
+/* contenedor de fragmentos */
+.fragment-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  z-index: 9999;
+  pointer-events: none;
+}
+
+/* cada fragmento */
+.fragment {
+  background: #000;
+  animation: fragmentMove 1.2s ease forwards;
+}
+
+/* animación de rotura */
+@keyframes fragmentMove {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+    filter: brightness(1);
+  }
+  50% {
+    transform: scale(1.1) rotate(5deg);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(var(--x), var(--y)) rotate(20deg) scale(0.5);
+    opacity: 0;
+    filter: blur(4px);
+  }
+}
+.boton-descarga {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 22px;
+  color: white;
+  background: #111;
+  border: 2px solid #00ff9c;
+  text-decoration: none;
+  font-family: monospace;
+  transition: 0.3s;
+}
+
+.boton-descarga:hover {
+  background: #00ff9c;
+  color: black;
+  box-shadow: 0 0 15px #00ff9c;
+}
