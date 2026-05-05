@@ -266,3 +266,9 @@ img {
   box-shadow: 0 0 15px #00ff9c;
   transform: scale(1.05);
 }
+.hacker {
+  font-family: monospace;
+  color: #ff0000;
+  font-size: 16px; /* tamaño normal */
+  letter-spacing: 1px;
+}
