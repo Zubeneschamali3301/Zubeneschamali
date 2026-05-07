@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>¡FELICIDADES!</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+<h1>🎉¡FELICIDADES MÁQUINAS!🎉</h1>
+<img src="gatochi.jpg" width="400">
+<br>
+<br>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<audio id="music" src="music.mp3" preload="auto"></audio>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script>
+window.onload = function() {
+
+  // 🔊 reproducir música
+  const music = document.getElementById("music");
+  music.volume = 0.6;
+  music.play().catch(() => {});
+
+  // 🎊 confeti 2 segundos
+  const duration = 2000;
+  const end = Date.now() + duration;
+
+  (function frame() {
+    confetti({
+      particleCount: 6,
+      angle: 60,
+      spread: 90,
+      origin: { x: 0 }
+    });
+    confetti({
+      particleCount: 6,
+      angle: 120,
+      spread: 90,
+      origin: { x: 1 }
+    });
+
+    if (Date.now() < end) {
+      requestAnimationFrame(frame);
+    }
+  }());
+};
+</script>
+<button class="boton-descarga" onclick="document.getElementById('music').play()">
+  ACTIVAR SONIDO 🔊
+</button>
+</div>
+</body>
+</html>
